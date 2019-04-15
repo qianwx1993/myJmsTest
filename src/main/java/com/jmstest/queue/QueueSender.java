@@ -18,8 +18,12 @@ public class QueueSender {
 			MessageProducer producer = session.createProducer(destination);
 
 			for (int i=0;i<3;i++){
-				TextMessage textMessage = session.createTextMessage("发送消息" + i);
-				producer.send(destination,textMessage);
+//				TextMessage textMessage = session.createTextMessage("发送消息" + i);
+				MapMessage mapMessage = session.createMapMessage();
+				mapMessage.setStringProperty("extra"+i,"okok");
+
+				mapMessage.setString("message--6"+i,"my map message"+i);
+				producer.send(destination,mapMessage);
 
 			}
 			session.commit();
