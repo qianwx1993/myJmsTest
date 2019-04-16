@@ -6,29 +6,25 @@ import org.apache.activemq.RedeliveryPolicy;
 import javax.jms.*;
 
 public class PersisentReceiver {
-	//TODO 持久化订阅消费这
+	//TODO 持久化订阅消费者
 	public static void main(String[] args) throws Exception {
 		ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
-		
-		RedeliveryPolicy policy = new RedeliveryPolicy();
-		policy.setMaximumRedeliveries(3);
-		cf.setRedeliveryPolicy(policy);
-		
-		Connection connection = cf.createConnection();
-		connection.start();
+		Connection connection = cf.createTopicConnection();
+		connection.setClientID("cc1");
 
 		final Session session = connection.createSession(Boolean.TRUE,
 				Session.AUTO_ACKNOWLEDGE);
-		Destination destination = session.createTopic("myTopic");
 
-		MessageConsumer consumer = session.createConsumer(destination);
+		Topic topic = session.createTopic("myTopic");
 
+		TopicSubscriber comsumer = session.createDurableSubscriber(topic, "t1");
+		connection.start();
 
-		Message message = consumer.receive();
+		Message message = comsumer.receive();
 		while(message!=null) {
 			TextMessage txtMsg = (TextMessage)message;
 			System.out.println("收到消息：" + txtMsg.getText());
-			message = consumer.receive(1000L);
+			message = comsumer.receive(1000L);
 		}
 
 		session.close();

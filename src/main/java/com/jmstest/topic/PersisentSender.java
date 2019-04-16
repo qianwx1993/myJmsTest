@@ -26,7 +26,7 @@ public class PersisentSender {
 			connection.start();
 
 			for (int i=0;i<3;i++){
-				TextMessage textMessage = session.createTextMessage("发送消息111" + i);
+				TextMessage textMessage = session.createTextMessage("发送消息222" + i);
 				System.out.println(textMessage.getText());
 				producer.send(textMessage);
 

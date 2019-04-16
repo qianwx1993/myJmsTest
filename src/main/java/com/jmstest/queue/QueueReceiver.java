@@ -38,7 +38,7 @@ public class QueueReceiver {
 			MapMessage mapMessage= (MapMessage) consumer.receive();
 //			System.out.println("收到消 息：" + message.getText());
 			System.out.println("收到消息：property:"+mapMessage.getStringProperty("extra"+i)+
-			",值："+mapMessage.getString("message--6"+i));
+			",值："+mapMessage.getString("message--8"+i));
 
 //			if (i==2){
 //				mapMessage.acknowledge();

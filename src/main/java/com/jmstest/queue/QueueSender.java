@@ -22,7 +22,7 @@ public class QueueSender {
 				MapMessage mapMessage = session.createMapMessage();
 				mapMessage.setStringProperty("extra"+i,"okok");
 
-				mapMessage.setString("message--6"+i,"my map message"+i);
+				mapMessage.setString("message--8"+i,"my map999message"+i);
 				producer.send(destination,mapMessage);
 
 			}
