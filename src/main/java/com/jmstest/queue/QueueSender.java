@@ -6,7 +6,7 @@ import javax.jms.*;
 
 public class QueueSender {
 	public static void main(String[] args) {
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61626");
 		Session session=null;
 		Connection connection=null;
 		try {
@@ -22,7 +22,7 @@ public class QueueSender {
 				MapMessage mapMessage = session.createMapMessage();
 				mapMessage.setStringProperty("extra"+i,"okok");
 
-				mapMessage.setString("message--8"+i,"my map999message"+i);
+				mapMessage.setString("message--16"+i,"my map999message"+i);
 				producer.send(destination,mapMessage);
 
 			}

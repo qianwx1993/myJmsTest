@@ -26,7 +26,7 @@ public class QueueReceiver {
 		3、当选择CLIENT_ACKNOWLEDGE应答模式，即connection.createSession(Boolean.FALSE,Session.CLIENT_ACKNOWLEDGE)时，
 		 客户端通过调用消息的acknowledge方法确认消息。
 		*/
-		final Session session = connection.createSession(Boolean.FALSE,Session.AUTO_ACKNOWLEDGE);
+		final Session session = connection.createSession(Boolean.TRUE,Session.AUTO_ACKNOWLEDGE);
 		Destination destination = session.createQueue("my-queue");
 
 		ActiveMQMessageConsumer consumer = (ActiveMQMessageConsumer)session.createConsumer(destination);
@@ -38,7 +38,7 @@ public class QueueReceiver {
 			MapMessage mapMessage= (MapMessage) consumer.receive();
 //			System.out.println("收到消 息：" + message.getText());
 			System.out.println("收到消息：property:"+mapMessage.getStringProperty("extra"+i)+
-			",值："+mapMessage.getString("message--8"+i));
+			",值："+mapMessage.getString("message--16"+i));
 
 //			if (i==2){
 //				mapMessage.acknowledge();
